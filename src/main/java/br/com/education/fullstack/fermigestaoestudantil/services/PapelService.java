@@ -15,4 +15,8 @@ public class PapelService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Papel especificado não encontrado"));
     }
 
+    public PapelEntity readByNome(String nome){
+        return repository.findByNome(nome).orElseThrow(() -> new RuntimeException("Papel especificado não encontrado"));
+    }
+
 }

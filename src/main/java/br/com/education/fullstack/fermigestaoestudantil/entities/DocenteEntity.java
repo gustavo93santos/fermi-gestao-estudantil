@@ -17,7 +17,7 @@ public class DocenteEntity {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date dataEntrada;
 
     @OneToOne(optional = false)

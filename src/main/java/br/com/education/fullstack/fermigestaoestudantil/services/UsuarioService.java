@@ -22,6 +22,14 @@ public class UsuarioService {
     private final TokenService tokenService;
     private final PapelService papelService;
 
+    public UsuarioEntity readById(Long id){
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não localizado"));
+    }
+
+    public void update(UsuarioEntity entity){
+        this.repository.save(entity);
+    }
+
     public ResponseEntity create(RegisterRequestDTO body){
         Optional<UsuarioEntity> usuario = this.repository
                 .findByNomeUsuario(body.nomeUsuario());
@@ -29,7 +37,6 @@ public class UsuarioService {
             UsuarioEntity novoUsuario = new UsuarioEntity();
             novoUsuario.setSenha(passwordEncoder.encode(body.senha()));
             novoUsuario.setNomeUsuario(body.nomeUsuario());
-            //novoUsuario.setPapel(body.papel());
             novoUsuario.setPapel(papelService.readById(body.papel()));
             this.repository.save(novoUsuario);
             String token = this.tokenService.gerarToken(novoUsuario);
