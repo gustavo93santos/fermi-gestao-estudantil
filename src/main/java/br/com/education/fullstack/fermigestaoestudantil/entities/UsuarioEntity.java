@@ -17,7 +17,7 @@ public class UsuarioEntity {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "papel_id")
     private PapelEntity papel;
 }

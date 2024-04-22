@@ -2,15 +2,12 @@ package br.com.education.fullstack.fermigestaoestudantil.services;
 
 import br.com.education.fullstack.fermigestaoestudantil.dto.DocenteDTO;
 import br.com.education.fullstack.fermigestaoestudantil.entities.DocenteEntity;
-import br.com.education.fullstack.fermigestaoestudantil.entities.PapelEntity;
 import br.com.education.fullstack.fermigestaoestudantil.entities.UsuarioEntity;
 import br.com.education.fullstack.fermigestaoestudantil.repositories.DocenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +18,13 @@ public class DocenteService {
 
     public DocenteEntity create (DocenteDTO body){
         UsuarioEntity usuario = usuarioService.readById(body.idUsuario());
+        if (usuario == null ||
+                body.idUsuario() == null ||
+                body.nome().isBlank() ||
+                body.papel().isBlank()){
+            return null;
+        }
+
         usuario.setPapel(papelService.readByNome(body.papel().toUpperCase()));
         usuarioService.update(usuario);
 

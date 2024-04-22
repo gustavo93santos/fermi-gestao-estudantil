@@ -23,7 +23,7 @@ public class UsuarioService {
     private final PapelService papelService;
 
     public UsuarioEntity readById(Long id){
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não localizado"));
+        return repository.findById(id).orElse(null);
     }
 
     public void update(UsuarioEntity entity){
@@ -39,7 +39,7 @@ public class UsuarioService {
             novoUsuario.setNomeUsuario(body.nomeUsuario());
             novoUsuario.setPapel(papelService.readById(body.papel()));
             this.repository.save(novoUsuario);
-            String token = this.tokenService.gerarToken(novoUsuario);
+            //String token = this.tokenService.gerarToken(novoUsuario);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
         return ResponseEntity.badRequest().build();
@@ -55,6 +55,6 @@ public class UsuarioService {
             String token = this.tokenService.gerarToken(usuario.get());
             return ResponseEntity.ok(new RespondeDTO(usuario.get().getNomeUsuario(), token));
         }
-        return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity("Unauthorized", HttpStatus.UNAUTHORIZED);
     }
 }

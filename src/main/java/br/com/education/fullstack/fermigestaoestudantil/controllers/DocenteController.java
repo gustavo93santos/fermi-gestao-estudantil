@@ -1,6 +1,7 @@
 package br.com.education.fullstack.fermigestaoestudantil.controllers;
 
 import br.com.education.fullstack.fermigestaoestudantil.dto.DocenteDTO;
+import br.com.education.fullstack.fermigestaoestudantil.entities.DocenteEntity;
 import br.com.education.fullstack.fermigestaoestudantil.services.DocenteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,13 @@ public class DocenteController {
 
     @PostMapping
     public ResponseEntity register (@RequestBody DocenteDTO body){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(body));
+
+        DocenteEntity docente = service.create(body);
+
+        if (docente != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(docente);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }
