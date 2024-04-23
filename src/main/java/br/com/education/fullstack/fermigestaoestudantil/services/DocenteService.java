@@ -3,6 +3,7 @@ package br.com.education.fullstack.fermigestaoestudantil.services;
 import br.com.education.fullstack.fermigestaoestudantil.dto.DocenteDTO;
 import br.com.education.fullstack.fermigestaoestudantil.entities.DocenteEntity;
 import br.com.education.fullstack.fermigestaoestudantil.entities.UsuarioEntity;
+import br.com.education.fullstack.fermigestaoestudantil.exceptions.NotFoundException;
 import br.com.education.fullstack.fermigestaoestudantil.repositories.DocenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,10 @@ public class DocenteService {
         this.repository.save(docente);
 
         return docente;
+    }
+
+    public DocenteEntity getById (Long id){
+        return repository.findById(id).orElseThrow(() ->new NotFoundException("Docente não localizado"));
     }
 
 }
