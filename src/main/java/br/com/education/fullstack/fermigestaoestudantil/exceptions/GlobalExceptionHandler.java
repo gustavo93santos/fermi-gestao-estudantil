@@ -12,6 +12,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionDTO> handler(NotFoundException e ){
         ExceptionDTO excetion = ExceptionDTO
                 .builder()
+                .codigo(HttpStatus.NOT_FOUND.value())
+                .mensagem(e.getMessage())
+                .build();
+        return ResponseEntity.status(excetion.codigo()).body(excetion);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ExceptionDTO> handler(BadRequestException e ){
+        ExceptionDTO excetion = ExceptionDTO
+                .builder()
                 .codigo(HttpStatus.BAD_REQUEST.value())
                 .mensagem(e.getMessage())
                 .build();

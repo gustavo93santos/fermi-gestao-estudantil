@@ -17,12 +17,7 @@ public class DocenteController {
 
     @PostMapping
     public ResponseEntity register (@RequestBody DocenteDTO body){
-        DocenteEntity docente = service.create(body);
-        if (docente != null){
-            return ResponseEntity.status(HttpStatus.CREATED).body(docente);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(body));
     }
 
     @GetMapping("{id}")
@@ -33,5 +28,10 @@ public class DocenteController {
     @GetMapping
     public ResponseEntity read () {
         return ResponseEntity.status(HttpStatus.OK).body(service.read());
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity update (@PathVariable Long id, @RequestBody DocenteDTO body) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, body));
     }
 }
