@@ -8,7 +8,9 @@ import br.com.education.fullstack.fermigestaoestudantil.repositories.DocenteRepo
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +40,16 @@ public class DocenteService {
         return docente;
     }
 
-    public DocenteEntity getById (Long id){
+    public DocenteEntity readById (Long id){
         return repository.findById(id).orElseThrow(() ->new NotFoundException("Docente não localizado"));
+    }
+
+    public List<DocenteEntity> read(){
+        List<DocenteEntity> docentes = repository.findAll();
+        if (docentes.isEmpty()) {
+            throw new NotFoundException("Docente não localizado");
+        }
+        return docentes;
     }
 
 }

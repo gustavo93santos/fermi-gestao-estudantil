@@ -27,6 +27,11 @@ public class DocenteController {
 
     @GetMapping("{id}")
     public ResponseEntity readById (@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(service.getById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(service.readById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity read () {
+        return ResponseEntity.status(HttpStatus.OK).body(service.read());
     }
 }
