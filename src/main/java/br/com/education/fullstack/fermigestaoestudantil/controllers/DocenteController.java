@@ -34,4 +34,10 @@ public class DocenteController {
     public ResponseEntity update (@PathVariable Long id, @RequestBody DocenteDTO body) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(id, body));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity delete (@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
 }

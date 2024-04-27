@@ -72,4 +72,9 @@ public class DocenteService {
         return docente;
     }
 
+    public void delete(Long id){
+        DocenteEntity docente = readById(id);
+        repository.delete(docente);
+    }
+
 }
