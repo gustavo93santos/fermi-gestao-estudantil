@@ -1,5 +1,6 @@
 package br.com.education.fullstack.fermigestaoestudantil.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,8 @@ public class MateriaEntity {
 
     @ManyToOne (optional = false)
     @JoinColumn(name = "curso_id", nullable = false)
+    //TODO retornar cursoEntity sem os list
+    @JsonIgnore
     private CursoEntity curso;
 
 }
