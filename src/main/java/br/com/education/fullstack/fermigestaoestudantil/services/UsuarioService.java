@@ -1,7 +1,7 @@
 package br.com.education.fullstack.fermigestaoestudantil.services;
 
 import br.com.education.fullstack.fermigestaoestudantil.dto.RegisterRequestDTO;
-import br.com.education.fullstack.fermigestaoestudantil.dto.RespondeDTO;
+import br.com.education.fullstack.fermigestaoestudantil.dto.ResponseDTO;
 import br.com.education.fullstack.fermigestaoestudantil.dto.loginRequestDTO;
 import br.com.education.fullstack.fermigestaoestudantil.entities.UsuarioEntity;
 import br.com.education.fullstack.fermigestaoestudantil.repositories.UsuarioRepository;
@@ -53,7 +53,7 @@ public class UsuarioService {
             return ResponseEntity.badRequest().build();
         } else if (passwordEncoder.matches(body.senha(), usuario.get().getSenha() )){
             String token = this.tokenService.gerarToken(usuario.get());
-            return ResponseEntity.ok(new RespondeDTO(usuario.get().getNomeUsuario(), token));
+            return ResponseEntity.ok(new ResponseDTO(usuario.get().getNomeUsuario(), token));
         }
         return new ResponseEntity("Unauthorized", HttpStatus.UNAUTHORIZED);
     }

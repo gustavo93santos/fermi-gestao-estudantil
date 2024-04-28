@@ -16,7 +16,7 @@ public class DocenteController {
     private final DocenteService service;
 
     @PostMapping
-    public ResponseEntity register (@RequestBody DocenteDTO body){
+    public ResponseEntity create (@RequestBody DocenteDTO body){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(body));
     }
 
