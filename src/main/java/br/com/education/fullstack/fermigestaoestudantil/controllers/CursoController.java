@@ -24,4 +24,19 @@ public class CursoController {
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity update (@PathVariable Long id, @RequestBody CursoDTO body){
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, body));
+    }
+
+    @GetMapping
+    public  ResponseEntity read (){
+        return ResponseEntity.status(HttpStatus.OK).body(service.read());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity readById (@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.readById(id));
+    }
 }

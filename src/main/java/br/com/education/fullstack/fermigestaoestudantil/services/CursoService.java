@@ -23,7 +23,7 @@ public class CursoService {
 
         CursoEntity curso = new CursoEntity();
         curso.setNome(body.nome());
-        repository.save(curso);
+        this.repository.save(curso);
         return curso;
     }
 
@@ -40,15 +40,19 @@ public class CursoService {
         return cursos;
     }
 
-    //TODO Implementar alterações
     public CursoEntity update(Long id, CursoDTO body){
-        CursoEntity curso = new CursoEntity();
+        CursoEntity curso = readById(id);
+        if (body.nome().isBlank()){
+            throw new BadRequestException("Requisição invalida!");
+        }
+        curso.setNome(body.nome());
+        this.repository.save(curso);
         return curso;
     }
 
     public void delete(Long id){
         CursoEntity curso = readById(id);
-        repository.delete(curso);
+        this.repository.delete(curso);
     }
 
 
