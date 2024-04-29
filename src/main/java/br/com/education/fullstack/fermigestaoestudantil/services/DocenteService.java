@@ -20,14 +20,12 @@ public class DocenteService {
     private final PapelService papelService;
 
     public DocenteEntity create (DocenteDTO body){
-        UsuarioEntity usuario = usuarioService.readById(body.idUsuario());
-        if (usuario == null ||
-                body.idUsuario() == null ||
+        if (    body.idUsuario() == null ||
                 body.nome().isBlank() ||
                 body.papel().isBlank()){
             throw new BadRequestException("Requisição invalida!");
         }
-
+        UsuarioEntity usuario = usuarioService.readById(body.idUsuario());
         usuario.setPapel(papelService.readByNome(body.papel().toUpperCase()));
         usuarioService.update(usuario);
 
@@ -54,14 +52,15 @@ public class DocenteService {
 
     public DocenteEntity update(Long id, DocenteDTO body){
         DocenteEntity docente = readById(id);
-        UsuarioEntity usuario = usuarioService.readById(body.idUsuario());
 
-        if (usuario == null ||
-                body.idUsuario() == null ||
+        if (    body.idUsuario() == null ||
                 body.nome().isBlank() ||
                 body.papel().isBlank()){
             throw new BadRequestException("Requisição invalida!");
         }
+        UsuarioEntity usuario = usuarioService.readById(body.idUsuario());
+        usuario.setPapel(papelService.readByNome(body.papel().toUpperCase()));
+        usuarioService.update(usuario);
 
         docente.setNome(body.nome());
         docente.setUsuario(usuario);
