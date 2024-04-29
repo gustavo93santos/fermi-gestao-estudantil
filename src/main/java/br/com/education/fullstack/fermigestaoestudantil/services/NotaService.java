@@ -2,6 +2,7 @@ package br.com.education.fullstack.fermigestaoestudantil.services;
 
 import br.com.education.fullstack.fermigestaoestudantil.dto.MateriaDTO;
 import br.com.education.fullstack.fermigestaoestudantil.dto.NotaDTO;
+import br.com.education.fullstack.fermigestaoestudantil.dto.PontoacaoResponseDTO;
 import br.com.education.fullstack.fermigestaoestudantil.entities.AlunoEntity;
 import br.com.education.fullstack.fermigestaoestudantil.entities.DocenteEntity;
 import br.com.education.fullstack.fermigestaoestudantil.entities.MateriaEntity;
@@ -70,5 +71,17 @@ public class NotaService {
     public List<NotaEntity> readByAluno (Long idAluno){
         AlunoEntity aluno = alunoService.readById(idAluno);
         return repository.findNotaEntitiesByAlunoEquals(aluno);
+    }
+
+    public PontoacaoResponseDTO getPontuacaoAluno (Long idAluno){
+        List<NotaEntity> notas = readByAluno(idAluno);
+
+        Long soma = 0L;
+        for (NotaEntity n : notas) {
+            soma += n.getValor();
+        }
+
+        PontoacaoResponseDTO pontuacao = new PontoacaoResponseDTO(soma/notas.size());
+        return pontuacao;
     }
 }

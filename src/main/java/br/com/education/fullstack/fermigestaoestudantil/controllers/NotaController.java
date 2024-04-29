@@ -40,4 +40,9 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.OK).body(service.readByAluno(idAluno));
     }
 
+    @GetMapping("/alunos/{idAluno}/pontuacao")
+    public ResponseEntity getPontuacaoAluno(@PathVariable Long idAluno){
+        return ResponseEntity.status(HttpStatus.OK).body(service.getPontuacaoAluno(idAluno));
+    }
+
 }
