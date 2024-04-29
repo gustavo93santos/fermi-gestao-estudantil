@@ -11,12 +11,14 @@ import br.com.education.fullstack.fermigestaoestudantil.exceptions.BadRequestExc
 import br.com.education.fullstack.fermigestaoestudantil.exceptions.NotFoundException;
 import br.com.education.fullstack.fermigestaoestudantil.repositories.NotaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class NotaService {
     private final NotaRepository repository;
@@ -25,10 +27,12 @@ public class NotaService {
     private final DocenteService docenteService;
 
     public NotaEntity create(NotaDTO body) {
+        log.info("NotaService: create: Inicio");
         if(     body.idAluno() == null ||
                 body.idMateria() == null ||
                 body.idProfessor() == null ||
                 body.valor() == null ){
+            log.error("NotaService: create: Dados invalidos para cadastro");
             throw new BadRequestException("Requisição invalida!");
         }
 
@@ -44,27 +48,34 @@ public class NotaService {
         nota.setData(new Date());
 
         repository.save(nota);
+        log.info("NotaService: create: Nota adicionada");
         return nota;
     }
 
     public NotaEntity readById(Long id) {
+        log.info("NotaService: readById: Inicio");
         return repository.findById(id).orElseThrow(() ->new NotFoundException("Nota não localizado"));
     }
 
     public NotaEntity update(Long id, NotaDTO body) {
+        log.info("NotaService: update: Inicio");
         NotaEntity nota = readById(id);
         if( body.valor() == null ){
+            log.error("NotaService: create: Dados invalidos para atualização da nota");
             throw new BadRequestException("Requisição invalida!");
         }
         nota.setValor(body.valor());
         nota.setData(new Date());
 
         repository.save(nota);
+        log.info("NotaService: delete: Nota atualizada com sucesso");
         return nota;
     }
 
     public void delete (Long id) {
+        log.info("NotaService: delete: Inicio");
         NotaEntity nota = readById(id);
+        log.info("NotaService: delete: Nota deletada com sucesso");
         repository.delete(nota);
     }
 
