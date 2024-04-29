@@ -5,9 +5,9 @@ Software batizado em homenagem a Enrico Fermi, um fisico italiano naturalizado e
 ## Sobre o Software
 
 O software visa ser uma suite completa para gestão estudantil, permitindo cadastro e acompanhamento de informações de diversos niveis.
-
 O cadastro de curso possui 3 niveis sendo eles Curso, Materia e Turma.
-Tambem possui controle de acesso para usuarios com politica de acessos diferencias baseado nas atribuições do Docente, tambem possuindo acesso para alunos de forma centralizada.
+
+Permite controle dos alunos vinculados as disciplinas e suas notas.
 
 ## Tech
 
@@ -46,3 +46,6 @@ port: 1432
 ```
 https://docs.google.com/document/d/1ZfxKvxv36a6sjDmaAxYFqLbJr1KqB6wNkDOnI6S_rns/edit
 ```
+
+## Melhorias Futuras
+Adicionar controle de acesso baseado em roles.
