@@ -1,6 +1,5 @@
 package br.com.education.fullstack.fermigestaoestudantil.controllers;
 
-import br.com.education.fullstack.fermigestaoestudantil.dto.CursoDTO;
 import br.com.education.fullstack.fermigestaoestudantil.dto.MateriaDTO;
 import br.com.education.fullstack.fermigestaoestudantil.services.MateriaService;
 import lombok.RequiredArgsConstructor;

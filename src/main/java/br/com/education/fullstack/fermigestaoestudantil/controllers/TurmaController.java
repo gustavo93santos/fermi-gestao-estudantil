@@ -1,27 +1,21 @@
 package br.com.education.fullstack.fermigestaoestudantil.controllers;
 
-import br.com.education.fullstack.fermigestaoestudantil.dto.DocenteDTO;
-import br.com.education.fullstack.fermigestaoestudantil.services.DocenteService;
+import br.com.education.fullstack.fermigestaoestudantil.dto.TurmaDTO;
+import br.com.education.fullstack.fermigestaoestudantil.services.TurmaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/docentes")
+@RequestMapping("/turmas")
 @RequiredArgsConstructor
-public class DocenteController {
-
-    private final DocenteService service;
+public class TurmaController {
+    private final TurmaService service;
 
     @PostMapping
-    public ResponseEntity create (@RequestBody DocenteDTO body){
+    public ResponseEntity create (@RequestBody TurmaDTO body) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(body));
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity readById (@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(service.readById(id));
     }
 
     @GetMapping
@@ -29,14 +23,19 @@ public class DocenteController {
         return ResponseEntity.status(HttpStatus.OK).body(service.read());
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity update (@PathVariable Long id, @RequestBody DocenteDTO body) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, body));
+    @GetMapping("{id}")
+    public ResponseEntity readById (@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.readById(id));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity delete (@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity update (@PathVariable Long id, @RequestBody TurmaDTO body) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, body));
     }
 }

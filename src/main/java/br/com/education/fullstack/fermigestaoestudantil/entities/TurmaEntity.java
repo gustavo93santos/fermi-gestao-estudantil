@@ -1,5 +1,6 @@
 package br.com.education.fullstack.fermigestaoestudantil.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class TurmaEntity {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "turma")
     private List<AlunoEntity> alunos;
 
     @ManyToOne(optional = false)
@@ -26,5 +27,7 @@ public class TurmaEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "curso_id", nullable = false)
+    //TODO retornar cursoEntity sem os list
+    @JsonIgnore
     private CursoEntity curso;
 }

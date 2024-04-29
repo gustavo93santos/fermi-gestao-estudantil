@@ -9,7 +9,6 @@ import br.com.education.fullstack.fermigestaoestudantil.repositories.DocenteRepo
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
 import java.util.Date;
 import java.util.List;
 

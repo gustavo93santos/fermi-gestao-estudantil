@@ -2,7 +2,6 @@ package br.com.education.fullstack.fermigestaoestudantil.services;
 
 import br.com.education.fullstack.fermigestaoestudantil.dto.CursoDTO;
 import br.com.education.fullstack.fermigestaoestudantil.entities.CursoEntity;
-import br.com.education.fullstack.fermigestaoestudantil.entities.DocenteEntity;
 import br.com.education.fullstack.fermigestaoestudantil.exceptions.BadRequestException;
 import br.com.education.fullstack.fermigestaoestudantil.exceptions.NotFoundException;
 import br.com.education.fullstack.fermigestaoestudantil.repositories.CursoRepository;
@@ -27,7 +26,6 @@ public class CursoService {
         return curso;
     }
 
-    //TODO Adicionar busca para completar objeto
     public CursoEntity readById(Long id){
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Curso não localizado"));
     }
